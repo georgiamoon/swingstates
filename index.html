@@ -128,7 +128,7 @@ function change() {
       .transition()
       .duration(300)
       .ease("quad")
-      .attr('r', function(d){ return d[value];})
+      .attr('r', function(d){ return d3.scale.sqrt(d[value]);})
       .style('fill', getRandomColor())
       .style("stroke", "black")
       .style("stroke-width", 0.5);      
