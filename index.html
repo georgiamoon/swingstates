@@ -19,6 +19,10 @@ var width = 960,
 var projection = d3.geo.mercator()
     .scale(200);
 
+var rScale = d3.scale.sqrt()
+  .domain([])
+  .range([0,20]);
+
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -64,7 +68,8 @@ d3.json("map/world-110m2.json", function(error, topology) {
         .data(indicators)
         .enter()
         .append("circle")
-        .attr("r", function(d){ return d3.scale.sqrt(d.Literacy_Rate);})
+        //.attr("r", function(d){ return scale.domain([0,d3.max(d.Literacy_Rate, function(d) {return d[0];})]).range([0,20]);})
+        .attr("r", function(d) {return d.Literacy_Rate;})
         .style("fill", "red")
         .style("stroke", "black")
         .style("stroke-width", 0.5)
@@ -128,7 +133,8 @@ function change() {
       .transition()
       .duration(300)
       .ease("quad")
-      .attr('r', function(d){ return d3.scale.sqrt(d[value]);})
+      //.attr('r', function(d){ return d3.scale.sqrt(d[value]);})
+      .attr('r', function(d){ return d[value];})
       .style('fill', getRandomColor())
       .style("stroke", "black")
       .style("stroke-width", 0.5);      
