@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style>
+ @import url("css/styles.css");
+ @import url("css/wide.css");
+ @import url("css/flexslider.css");
+
+body, svg {
+  background: #FFFBEF;
+  margin: 10px;
+  font-family: "MetaSerifWeb-Book", serif;
+}
+
+.infobox {
+  float: right;
+  position: absolute;
+  top: 150px;
+  right: 200px;
+  width: 300px;
+  height: 200px;
+
+}
+
+h2, h3 {
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+h3{
+  border-bottom: 5px solid rgba(51, 50, 50, 0.2);
+
+}
+
+path {
+  stroke: #656977;
+  stroke-width: 0.05px;
+}
+</style>
+<script src="d3/d3.v3.min.js"></script>
+<script src="d3/topojson.v0.min.js"></script>
+</head>
+<body>
+<h2>WCIT VOTE</h2>
+<p>Messenger bag Schlitz before they sold out, Austin crucifix viral plaid iPhone Portland Pinterest cred sustainable kogi. Intelligentsia kale chips yr hashtag, letterpress synth banh mi XOXO flexitarian sartorial. Hella Cosby sweater semiotics kitsch, fashion axe plaid Banksy Bushwick organic. Organic sartorial Cosby sweater, Portland asymmetrical VHS hoodie retro dreamcatcher. Marfa narwhal DIY swag sartorial brunch. Before they sold out ugh readymade narwhal Helvetica cred. Keytar Bushwick semiotics wolf.</p>
+<svg></svg>
+<div class="infobox">
+  <h3>Country</h3>
+  <span2></span2> <br />
+  WCIT Vote: <span3></span3> <br />
+</div>
+<div>
+  <span style="background-color: #5ba4da"> Did not sign </span> 
+  <span style="background-color: #A7D5A2">  Signed  </span>
+</div> 
+<script>
+var width = 800,
+    height = 400;
+
+/*var projection = d3.geo.mercator()
+    .translate([width / 2, height / 2])
+    .scale((width - 1) / 2 / Math.PI);*/
+
+var projection = d3.geo.equirectangular()
+    .scale(125)
+    .translate([width / 2, height / 2])
+    .precision(.1)
+
+var svg = d3.select("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var g = svg.append("g");
+
+// load and display the World
+d3.json("map/all_countries_join.json", function(error, topology) {
+
+  // load and display the cities
+   g.selectAll("path")
+          .data(topojson.object(topology, topology.objects.countries_join).geometries)
+        .enter()
+          .append("path")
+          .attr("class", function(d) { 
+              //console.log(d.id); 
+              return d.id; 
+            })
+          //.attr("fill", "#999")
+          .attr("fill", function(d){
+              if(d.properties.WCIT_Record == 0){ return "#5ba4da";}
+              else if(d.properties.WCIT_Record == 1) { return "#A7D5A2";}
+              else return "#999";
+          })
+          .on("mouseover", function(d) { 
+              //d3.select("img").attr("src", d.flag);
+              d3.select("h3").text(d.properties.name);
+              
+              
+              if(d.properties.WCIT_Record == 0){ d3.select("span3").text("Did not sign");}
+              else if(d.properties.WCIT_Record == 1) { d3.select("span3").text("Signed");}
+              else return d3.select("span3").text("N/A");
+
+              if(d.properties.master == 0){ d3.select("span2").text("Not Swing State: Authoritarian/Not Free");} //dark 1 color
+                else if(d.properties.master == 1){ d3.select("span2").text("Swing State: OECD but negative voting");} // light 1 color
+                else if(d.properties.master == 2){ d3.select("span2").text("Swing State: FOC but negative voting record");} // light 1 color
+                else if(d.properties.master == 3){ d3.select("span2").text("Swing State: Indicators based");} // light 1 color
+                else if(d.properties.master == 4){ d3.select("span2").text("Swing State: Positive voting record but not OECD, EU, and/or FOC member");} // light 2 color
+                else if(d.properties.master == 5) { d3.select("span2").text("Not Swing State: OECD, EU, and/or FOC member");} // dark 2 color
+                else return d3.select("span2").text("N/A");
+            })
+          .on("click", function(d) { 
+              //d3.select("img").attr("src", d.flag);
+              d3.select("h3").text(d.properties.name);
+              
+              
+              if(d.properties.WCIT_Record == 0){ d3.select("span3").text("Did not sign");}
+              else if(d.properties.WCIT_Record == 1) { d3.select("span3").text("Signed");}
+              else return d3.select("span3").text("N/A");
+
+              if(d.properties.master == 0){ d3.select("span2").text("Not Swing State: Authoritarian/Not Free");} //dark 1 color
+                else if(d.properties.master == 1){ d3.select("span2").text("Swing State: OECD but negative voting");} // light 1 color
+                else if(d.properties.master == 2){ d3.select("span2").text("Swing State: FOC but negative voting record");} // light 1 color
+                else if(d.properties.master == 3){ d3.select("span2").text("Swing State: Indicators based");} // light 1 color
+                else if(d.properties.master == 4){ d3.select("span2").text("Swing State: Positive voting record but not OECD, EU, and/or FOC member");} // light 2 color
+                else if(d.properties.master == 5) { d3.select("span2").text("Not Swing State: OECD, EU, and/or FOC member");} // dark 2 color
+                else return d3.select("span2").text("N/A");
+            })
+          .attr("d", path)
+          .append("svg:title")
+            .text(function(d){ return "Country: "+ d.properties.name + ", Code: "+ d.id;});
+
+});
+
+
+// zoom and pan
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed);
+
+function zoomed() {
+  g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+d3.select(self.frameElement).style("height", height + "px");
+
+svg.call(zoom);
+
+</script>
+
+
+</body>
+</html>
