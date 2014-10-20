@@ -1,4 +1,4 @@
-* {
+a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
@@ -328,7 +328,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -452,7 +452,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -660,8 +660,8 @@ h1 a:hover {
 ========================*/
 a, [id=books] .flexslider .slides li, blockquote {
   text-decoration: none;
-  color: #2dbbb3;
-  border-color: #2dbbb3; }
+  color: #5ba4da;
+  border-color: #5ba4da; }
   a.asset-building, [id=books] .flexslider .slides li.asset-building, blockquote.asset-building {
     color: #4d3969;
     border-color: #4d3969; }
@@ -779,10 +779,10 @@ Also see _icons.scss
     border-bottom-color: #fffaef; }
 
 .viewMore {
-  color: #2dbbb3;
+  color: #5ba4da;
   background-size: 13px auto; }
   .viewMore:hover b {
-    border-bottom-color: #2dbbb3; }
+    border-bottom-color: #5ba4da; }
 
 .tags, .programs {
   list-style: none;
@@ -1136,8 +1136,8 @@ aside.credit {
   text-transform: uppercase; }
 
 .index h3 a:hover {
-  color: #2dbbb3;
-  border-bottom-color: #2dbbb3; }
+  color: #5ba4da;
+  border-bottom-color: #5ba4da; }
 
 .page .contentlist {
   list-style-type: none; }
@@ -1195,7 +1195,7 @@ and basic article list pages
     cursor: pointer; }
     .results-heading span.active {
       color: #333232;
-      border-bottom: 2px solid #2dbbb3; }
+      border-bottom: 2px solid #5ba4da; }
     .results-heading span:hover {
       color: #333232; }
 
@@ -1205,7 +1205,7 @@ Used on tags/index.html
 .tags-page-list {
   text-transform: capitalize; }
   .tags-page-list a:link {
-    color: #2dbbb3; }
+    color: #5ba4da; }
 
 .bulleted {
   margin-left: 0 !important; }
@@ -1713,7 +1713,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -2152,7 +2152,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -2166,7 +2166,7 @@ HEADER
   color: #fffaef;
   padding: 7.25em 0 3em 0; }
   [id=masterContent] > header.index {
-    background-color: #2dbbb3; }
+    background-color: #5ba4da; }
   [id=masterContent] > header.asset-building {
     background-color: #4d3969; }
   [id=masterContent] > header.breadwinning-caregiving {
@@ -2279,7 +2279,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -2328,7 +2328,7 @@ Typography
 
 [id=na-global-nav], [id=na-sub-nav], [id=na-sub-nav-s] {
   left: 0;
-  background-color: #2dbbb3;
+  background-color: #5ba4da;
   width: 100%;
   z-index: 10;
   position: fixed; }
@@ -2726,7 +2726,7 @@ input[name=q] {
   z-index: 2000;
   height: 80px;
   width: 100%;
-  background-color: #2dbbb3; }
+  background-color: #5ba4da; }
   @media screen and (max-width: 500px) {
     .na-bar {
       position: absolute; } }
@@ -3133,7 +3133,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -3252,7 +3252,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -3322,13 +3322,13 @@ Typography
     [id=filters] .wrapper ul a li:after {
       content: '\00a0\00a0'; } }
 .index blockquote, .page blockquote {
-  border-color: #2dbbb3; }
+  border-color: #5ba4da; }
 .index [id=filters] .current, .index [id=filters] a:hover, .page [id=filters] .current, .page [id=filters] a:hover {
-  border-bottom-color: #2dbbb3; }
+  border-bottom-color: #5ba4da; }
 .index [id=filters] a:hover, .page [id=filters] a:hover {
-  color: #2dbbb3; }
+  color: #5ba4da; }
 .index a, .page a {
-  color: #2dbbb3; }
+  color: #5ba4da; }
 
 .asset-building blockquote {
   border-color: #4d3969; }
@@ -3607,7 +3607,7 @@ Home page events List
       font-family: "SimplonNorm-Regular-WebS", arial, sans-serif; }
   [id=upcomingEvents] .now {
     font-weight: bold;
-    color: #2dbbb3; }
+    color: #5ba4da; }
   [id=upcomingEvents] .eventLoc {
     background-size: 7px auto;
     font-size: 1em;
@@ -3639,7 +3639,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -3930,7 +3930,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -4481,11 +4481,11 @@ Link colors
   border-bottom: 2px solid #fffaef; }
 
 .index [id=books] a:hover {
-  border-bottom-color: #2dbbb3; }
+  border-bottom-color: #5ba4da; }
 .index [id=books] .flexslider .slides li:hover {
-  border-right-color: #2dbbb3; }
+  border-right-color: #5ba4da; }
   .index [id=books] .flexslider .slides li:hover a {
-    color: #2dbbb3; }
+    color: #5ba4da; }
 
 .asset-building [id=featured] a:hover, .asset-building [id=recent] a:hover, .asset-building [id=books] a:hover {
   color: #4d3969; }
@@ -4652,7 +4652,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -4812,7 +4812,7 @@ Styles for pages
       .page article section > ul.event-list + .viewMore {
         margin-left: 0 !important; }
   .page.press-room p a {
-    color: #2dbbb3;
+    color: #5ba4da;
     border-bottom: none; }
 
 #events-content section {
@@ -4847,7 +4847,7 @@ Styles for pages
   [id=rss] li {
     margin: 1em 0; }
   [id=rss] a:link, [id=rss] a:visited {
-    color: #2dbbb3; }
+    color: #5ba4da; }
   [id=rss] a:hover {
     color: #333232;
     border-bottom: 2px solid currentColor; }
@@ -4961,7 +4961,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5036,7 +5036,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5124,7 +5124,7 @@ aside.sharing {
   .page [id=author-pg-expertise] a:link {
     border-bottom: none; }
   .page [id=author-pg-expertise] a:hover {
-    border-bottom-color: #2dbbb3; }
+    border-bottom-color: #5ba4da; }
 
 [id=author-pg-expertise] {
   text-transform: capitalize;
@@ -5146,7 +5146,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5214,7 +5214,7 @@ Typography
 
 .eli-author {
   font-family: "SimplonNorm-Bold-WebS", arial, sans-serif;
-  color: #2dbbb3; }
+  color: #5ba4da; }
 
 section header {
   margin-top: 0px;
@@ -5328,7 +5328,7 @@ section header {
         -webkit-filter: grayscale(1);
         filter: grayscale(1); }
       #fellowList .expert-container .crop a:hover, #staffList .expert-container .crop a:hover, #councilList .expert-container .crop a:hover, #boardList .expert-container .crop a:hover {
-        background: #2dbbb3;
+        background: #5ba4da;
         display: block; }
         #fellowList .expert-container .crop a:hover img, #staffList .expert-container .crop a:hover img, #councilList .expert-container .crop a:hover img, #boardList .expert-container .crop a:hover img {
           opacity: .5; }
@@ -5342,7 +5342,7 @@ section header {
         font-size: 13px;
         line-height: 1.1; }
     #fellowList .expert-container a, #staffList .expert-container a, #councilList .expert-container a, #boardList .expert-container a {
-      color: #2dbbb3; }
+      color: #5ba4da; }
     #fellowList .expert-container a:hover, #staffList .expert-container a:hover, #councilList .expert-container a:hover, #boardList .expert-container a:hover {
       border-bottom: 2px solid; }
 
@@ -5371,7 +5371,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5555,7 +5555,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5679,7 +5679,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5798,7 +5798,7 @@ Typography
 .contrib-tier {
   *zoom: 1;
   margin: 3.2em 0 1em 0;
-  color: #2dbbb3;
+  color: #5ba4da;
   font-size: 1.1em; }
   .contrib-tier:before, .contrib-tier:after {
     content: " ";
@@ -5815,7 +5815,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5851,7 +5851,7 @@ Link variables
 /*======================
 Program colors
 =======================*/
-/* Old color #2DBBB3 */
+/* Old color #5ba4da */
 /*======================
 Typography
 =======================*/
@@ -5861,7 +5861,7 @@ Typography
   display: inline; }
   [id=locations] li.active {
     color: #333232;
-    border-color: #2dbbb3;
+    border-color: #5ba4da;
     border-bottom: 2px solid; }
   [id=locations] li:hover {
     color: #333232; }
@@ -5873,8 +5873,8 @@ button.viewMore, .button.viewMore {
   padding: 0;
   cursor: pointer; }
   button.viewMore:hover, .button.viewMore:hover {
-    color: #2dbbb3;
-    border-color: #2dbbb3;
+    color: #5ba4da;
+    border-color: #5ba4da;
     border-bottom: 2px solid; }
   button.viewMore.hidden, .button.viewMore.hidden {
     visibility: hidden; }
