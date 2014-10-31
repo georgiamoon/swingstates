@@ -1,0 +1,64 @@
+I. POLITICAL SYSTEM	
+Democracy Index: Score	
+Democracy Index: Regime Type	
+Freedom House Index	
+Effective power to govern index (Q2.2)
+
+II. INTERNATIONAL COOPERATION	
+Interest Groups (Q5.2)	
+Effective use of Support (Q17.1)	
+Government as a credible partner  (Q17.2)
+
+III. SIGN OF ACTIVE GOVERNMENT INTEREST IN CYBER POLICY	
+Sponsors of Resolution	
+National Replies (1999-2011)	
+WCIT voting record (0 = No; 1= Yes)	
+Composition of UN GGE	
+Members of the Freedom Online Coalition?
+
+IV. INDIRECT INDICATORS OF GOVERNMENT INTEREST IN CYBER POLICY (ASSUMPTION OF CONTINUED RISE OF CYBER POLICY FROM LOW TO HIGH POLITICS)	
+G20 membership	
+Economist CyberPower Index	
+UNSC Members (+/- 5 years)
+
+V. COUNTRY'S TECH PROFILE	
+Internet Penetration Rate (users per 100 people)	
+Fixed broadband internet subscribers (per 100 people)	
+Mobile Phone Penetration (users per 100 people)	
+Use of virtual social networks (1-7 Scale)	
+Access to Digital Content (1-7 Scale)	
+International Internet bandwidth
+
+VI. COUNTRY'S ECONOMIC TECH PROFILE	
+WEF Network Readiness Index	
+WEF Capacity for Innovation (1-7 Scale)	
+ICT Goods exports (as a % of total)	
+ICT Services exports (as a % of total)	
+ICT Goods imports (as a % of total)
+
+VII. COUNTRY'S HUMAN CAPACITY PROFILE	
+Bertelsmann's Status Score	
+WGI: Political Stability and Absence of Violence (-3 to 3 scale)	
+Literacy Rate	
+% of Population 15-29	
+HDI
+
+VIII. COUNTRY'S CIVIL SOCIETY PROFILE	
+Civicus Enabling Environment Index	
+CSO traditions (Q13.2)	
+CSO Index (Q16.4)	
+
+IX. POLITICAL USE OF TECH	
+E-participation Index	
+Political Party use of Web for mobilization (1-10 Scale)
+
+X. OTHERS
+GDP Per Capita	
+Secure Servers (per 1 million people)	
+WGI: Voice and Accountability (-3 to 3 scale)	
+Internet users (Per 100 people)	
+Total Population (World Bank)	
+USAID NGO Index - NGO and Sustainability	
+Freedom House Index v. Freedom House 
+Civil Liberties Score (seperate sheet)	
+Non-permanent members of UNSC over the previous 5 and for the next 5 years (in a separate sheet)

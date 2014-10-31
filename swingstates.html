@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style>
+@import url("css/styles.css");
+@import url("css/wide.css");
+@import url("css/flexslider.css");
+
+body, svg {
+  background: #FFFBEF;
+  margin: 10px;
+  font-family: "MetaSerifWeb-Book", serif;
+}
+
+.infobox-swing {
+  float: right;
+  position: absolute;
+  top: 300px;
+  right: 1px;
+  width: 200px;
+  height: 150px;
+  background-color: #FFFBEF;
+  background-color: rgba(255,251,239,0.5);
+  border-width: 0.05px;
+  border-color: #333;
+  padding: 3px;
+}
+
+.legend {
+  background-color: #FFFBEF;
+  border-width: 0.05px;
+  border-color: #333;
+  padding: 3px;
+}
+
+.cigi-logo {
+  float: right;
+  position: absolute;
+  top: 425px;
+  right: 1px;
+  width: 100px;
+  border-width: 0.05px;
+  border-color: #333;
+  padding: 3px;
+}
+
+#square {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+h2, h3 {
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+h3{
+  border-bottom: 5px solid rgba(51, 50, 50, 0.2);
+
+}
+
+path {
+  stroke: #43454d;
+  stroke-width: 0.05px;
+  stroke-opacity: 1;
+}
+
+</style>
+<script src="d3/d3.v3.min.js"></script>
+<script src="d3/topojson.v0.min.js"></script>
+</head>
+<body>
+
+<svg></svg>
+<div class="infobox-swing">
+  <h3>Country</h3>
+  WCIT Vote: <span3></span3> <br />
+  <span2></span2> <br />
+</div>
+<div class="legend">
+<img class="cigi-logo" src="oti-cigi-Logo_RGB.png" />
+<table style="width:100%">
+    <tr>
+    <td><div id="square" style="background-color: #29B1FF;"></div>  Swing States that voted against the ITRs </td>
+    <td><div id="square" style="background-color: #55DEA2;"></div>  Swing States that voted for the ITRs</td> 
+  </tr>
+  <tr>
+    <td><div id="square" style="background-color: #29B1FF; opacity: 0.25;"></div> Not a Swing State: OECD, EU and/or FOC member</td>
+    <td><div id="square" style="background-color: #55DEA2; opacity: 0.25;"></div>  Not a Swing State: Authoritarian and/or Not Free</td> 
+  </tr>
+  <tr>
+    <td><div id="square" style="background-color: #333; opacity: 0.1;"></div> Other: Lacks either the mixed political orientation, population, or economic output needed for top Swing State status</td>
+  </tr>
+</table>
+</div>
+<script>
+var width = 688,
+    height = 400;
+
+/*var projection = d3.geo.mercator()
+    .translate([width / 2, height / 2])
+    .scale((width - 1) / 2 / Math.PI);*/
+
+var projection = d3.geo.equirectangular()
+    .scale(130)
+    .translate([width / 2, height / 2])
+    .precision(.1)
+
+var svg = d3.select("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var g = svg.append("g");
+
+// load and display the World
+d3.json("map/mapbasejoin.json", function(error, topology) {
+
+  // load and display the cities
+   g.selectAll("path")
+          .data(topojson.object(topology, topology.objects.ne_10m_admin_0_map_subunits).geometries)
+        .enter()
+          .append("path")
+          .attr("class", function(d) { 
+              //console.log(d.id); 
+              return d.id; 
+            })
+          //.attr("fill", "#999")
+          //blue & green color combo
+          .attr("fill", function(d){
+              if(d.properties.master == 0){ return "#55DEA2";} //dark 1 color
+                else if(d.properties.master == 1){ return "#55DEA2";} // light 1 color
+                else if(d.properties.master == 2){ return "#55DEA2";} // light 1 color
+                else if(d.properties.master == 3){ return "#55DEA2";} // light 1 color
+                else if(d.properties.master == 4){ return "#29B1FF";} // light 2 color
+                else if(d.properties.master == 5) { return "#29B1FF";} // dark 2 color
+                else return "#333";
+
+          })
+          //black & red
+          /*.attr("fill", function(d){
+            if(d.properties.master == 0){ return "#444444";} //dark 1 color
+                else if(d.properties.master == 1){ return "#8B8D90";} // light 1 color
+                else if(d.properties.master == 2){ return "#8B8D90";} // light 1 color
+                else if(d.properties.master == 3){ return "#8B8D90";} // light 1 color
+                else if(d.properties.master == 4){ return "#EB9A99";} // light 2 color
+                else if(d.properties.master == 5) { return "#ED2826";} // dark 2 color
+                else return "#656977";
+
+          })*/
+          .attr("fill-opacity", function(d){
+            if(d.properties.master == 0){ return "0.25";} //dark 1 color
+                else if(d.properties.master == 1){ return "1";} // light 1 color
+                else if(d.properties.master == 2){ return "1";} // light 1 color
+                else if(d.properties.master == 3){ return "1";} // light 1 color
+                else if(d.properties.master == 4){ return "1";} // light 2 color
+                else if(d.properties.master == 5) { return "0.25";} // dark 2 color
+                else return "0.1";
+          })
+          .on("mouseover", function(d) { 
+              d3.select("h3").text(d.properties.name);            
+              
+              if(d.properties.WCIT_Record == 0){ d3.select("span3").text("Did not sign");}
+              else if(d.properties.WCIT_Record == 1) { d3.select("span3").text("Signed");}
+              else return d3.select("span3").text("N/A");
+
+              d3.select("span2").text(d.properties.Note);
+            })
+          .attr("d", path);
+
+});
+
+
+// zoom and pan
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed);
+
+function zoomed() {
+  g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+d3.select(self.frameElement).style("height", height + "px");
+
+svg.call(zoom);
+
+</script>
+<p><em>Swing States in the Internet Governance debate. Source: <a href="http://www.cigionline.org/publications/tipping-scale-analysis-of-global-swing-states-internet-governance-debate" target="_blank">Tipping the Scale: An Analysis of Global Swing States in the Internet Governance Debate</a>. <a href="http://files.opentechinstitute.org/~georgia/swingstates/swingstates.html" target="_blank">See the full map.</a></em></p>
+
+</body>
+</html>

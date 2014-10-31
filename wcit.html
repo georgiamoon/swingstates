@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style>
+ @import url("css/styles.css");
+ @import url("css/wide.css");
+ @import url("css/flexslider.css");
+
+body, svg {
+  background: #FFFBEF;
+  margin: 10px;
+  font-family: "MetaSerifWeb-Book", serif;
+}
+
+.infobox-wcit {
+  float: right;
+  position: absolute;
+  top: 300px;
+  right: 1px;
+  width: 200px;
+  height: 150px;
+  background-color: #FFFBEF;
+  background-color: rgba(255,251,239,0.5);
+  border-width: 0.05px;
+  border-color: #333;
+  padding: 3px;
+}
+
+.legend {
+  background-color: #FFFBEF;
+  border-width: 0.05px;
+  border-color: #333;
+  padding: 3px;
+}
+
+#square {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+h2, h3 {
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+h3{
+  border-bottom: 5px solid rgba(51, 50, 50, 0.2);
+
+}
+
+path {
+  stroke: #43454d;
+  stroke-width: 0.05px;
+  stroke-opacity: 1;
+}
+</style>
+<script src="d3/d3.v3.min.js"></script>
+<script src="d3/topojson.v0.min.js"></script>
+</head>
+<body>
+<svg></svg>
+<div class="infobox-wcit">
+  <h3>Country</h3>
+  WCIT Vote: <span3></span3> <br />
+  <span2></span2> <br />
+</div>
+<div class="legend">
+  <table>
+    <tr>
+      <td><div id="square" style="background-color: #29B1FF;"></div> Did not sign</td>
+      <td><div id="square" style="background-color: #55DEA2;"></div> Signed</td>
+    </tr>
+    <tr>
+      <td><div id="square" style="background-color: #333; opacity: 0.1;"></div> No Voting Information Available </td>
+    </tr>
+  </table>
+</div> 
+<script>
+var width = 688,
+    height = 400;
+
+/*var projection = d3.geo.mercator()
+    .translate([width / 2, height / 2])
+    .scale((width - 1) / 2 / Math.PI);*/
+
+var projection = d3.geo.equirectangular()
+    .scale(200)
+    .translate([width / 2, height / 2])
+    .precision(.1)
+
+var svg = d3.select("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var g = svg.append("g");
+
+// load and display the World
+d3.json("map/mapbasejoin.json", function(error, topology) {
+
+  // load and display the cities
+   g.selectAll("path")
+          .data(topojson.object(topology, topology.objects.ne_10m_admin_0_map_subunits).geometries)
+        .enter()
+          .append("path")
+          .attr("class", function(d) { 
+              return d.id; 
+            })
+          .attr("fill", function(d){
+                if(d.properties.WCIT_Record == 0){ return "#29B1FF";}
+                else if(d.properties.WCIT_Record == 1) { return "#55DEA2";}
+                else return "#333";
+          })
+          .attr("fill-opacity", function(d){
+                if(d.properties.WCIT_Record == 0){ return 1;}
+                else if(d.properties.WCIT_Record == 1) { return 1;}
+              else return 0.1;
+          })
+          .on("mouseover", function(d) { 
+              d3.select("h3").text(d.properties.name);
+              
+              if(d.properties.WCIT_Record == 0){ d3.select("span3").text("Did not sign");}
+              else if(d.properties.WCIT_Record == 1) { d3.select("span3").text("Signed");}
+              else return d3.select("span3").text("N/A");
+
+            })
+          .attr("d", path);
+});
+
+
+// zoom and pan
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed);
+
+function zoomed() {
+  g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+d3.select(self.frameElement).style("height", height + "px");
+
+svg.call(zoom);
+
+</script>
+<em>WCIT 2012 Voting Results. Source: <a href="http://www.itu.int/osg/wcit-12/highlights/signatories.html" target="_blank">ITU</a>. <a href="http://files.opentechinstitute.org/~georgia/swingstates/wcit.html" target="_blank">See the full map.</a></em>
+
+</body>
+</html>

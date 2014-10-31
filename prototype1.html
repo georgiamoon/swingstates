@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+</style>
+<body>
+<script src="d3/d3.js"></script>
+<script src="d3/topojson.v1.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script>
+var width = 960,
+        height = 500;
+
+var projection = d3.geo.mercator()
+    .scale(200);
+
+var rScale100 = d3.scale.sqrt()
+  .domain([0,100])
+  .range([5,30]);
+
+var rScale10 = d3.scale.sqrt()
+  .domain([0,10])
+  .range([0,50]);
+
+var rScaleCat = d3.scale.sqrt()
+  .domain([0,10])
+  .range([0,50]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var g = svg.append("g");
+
+var value;
+var data;
+var dd;
+var locations;
+
+// load and display the World
+
+d3.json("map/all_countries.json", function(error, topology) {
+  // load and display the cities
+    d3.csv("data/CIGI_Indicators1_7.csv", function(error, indicators) {
+      d3.csv("data/dropdown.csv", function(error, fields){
+      console.log(fields);
+      data = indicators;
+      //console.log(indicators);
+
+      var select = d3.select("body")
+            .append("div")
+            .append("select")
+            .on("change", change);
+
+      select.selectAll("option")
+            .data(fields)
+            .enter()
+              .append("option")
+              .attr("value", function (d) { return d.id; })
+              .text(function (d) { console.log(d.label); return d.name;});
+
+      //select.on("change", function(){return dd.get(this.value); console.log(dd.get(this.value));});
+      
+      //dots on the map
+      g.selectAll("circle")
+        .data(indicators)
+        .enter()
+        .append("circle")
+        .attr("r", function(d) { if (d.Literacy_Rate > 0) { return rScale100(d.LiteracyRate);} else return 0; })
+        .style("fill", "red")
+        .style("stroke", "black")
+        .style("stroke-width", 0.5)
+        .attr("cx", function(d) {
+                 return projection([d.geo_longitude, d.geo_latitude])[0];
+         })
+         .attr("cy", function(d) {
+                 //console.log(projection([d.geo_longitude, d.geo_latitude])[1]);
+                 return projection([d.geo_longitude, d.geo_latitude])[1];
+         })
+         .append("svg:title")
+          .text(function(d){ return d.Country + ", Literacy Rate: " + d.LiteracyRate ;});
+
+      /*g.selectAll("circle")
+         .data(picked_val)
+         .enter()
+         .attr("r", function(d){ return d.value;})
+         .style("fill", "red")
+         .style("stroke", "black")
+         .style("stroke-width", 0.5)
+         .append("svg:title")
+          .text(function(d) { return d.id + ", " + d.id + ": " + d.value; });*/
+});
+  });
+
+     // console.log(data);
+
+   g.selectAll("path")
+          .data(topojson.object(topology, topology.objects.countries)
+              .geometries)
+        .enter()
+          .append("path")
+          .attr("d", path);
+});
+
+
+// zoom and pan
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", move);
+
+function move() {
+  var t = d3.event.translate,
+      s = d3.event.scale;
+  t[0] = Math.min(width / 2 * (s - 1), Math.max(width / 2 * (1 - s), t[0]));
+  t[1] = Math.min(height / 2 * (s - 1) + 230 * s, Math.max(height / 2 * (1 - s) - 230 * s, t[1]));
+  zoom.translate(t);
+  g.style("stroke-width", 1 / s).attr("transform", "translate(" + t + ")scale(" + s + ")");
+}
+
+function change() {
+    value = d3.select(this).property("value");
+    console.log(value);
+
+    //data = d3.entries(dd.get(value)[0]);
+    //removed = data.splice(0,1);
+    //console.log(d3.values(data));
+
+   d3.selectAll('circle')
+      .data(data)
+      .filter(function(d) {return d[value];})
+      .transition()
+      .duration(300)
+      .ease("quad")
+      .attr('r', function(d){ return rScale100(d[value]);})
+      .style('fill', getRandomColor())
+      .style("stroke", "black")
+      .style("stroke-width", 0.5);      
+    
+    g.selectAll("title")
+        .data(data)
+        .filter(function(d) {return d[value];})
+        .text(function(d){ return d.Country + ", " + value + ": " + d[value] ;});
+
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+svg.call(zoom)
+
+</script>
+
+<span id="name"></span>
+
+<!-- FIELDS
+Access_DigContent: "4.2"
+BMStatus: "7.02"
+CSOIndex: "6"
+CSOtraditions: "8"
+CivicusEnabEnviro: "0.55"
+Country: "Albania"
+DIScore: "5.67"
+DI_RegimeType: "Hybrid Regime"
+E-participation: "0.1053"
+EPgovern: "7"
+Econ_CyberPower: ""
+EffectiveSupport: "7"
+FOC: "0"
+Fixed_BB_Subscribers: "4.957592444"
+FreedomHouse: "PF"
+G20: "0"
+GDP_Cap: "3999.92531"
+GovPartner: "7"
+HDI: "0.749"
+ICT_Goods_Imp: "3.579902835"
+ICT_Goods_X: "0.523498088"
+ICT_Service_X: "10.91825178"
+InterestGroups: "6"
+InternetUsers: ""
+Internet_Pen: "54.7"
+Intl_Int_Bandwidth: "19"
+Literacy_Rate: "96.8453"
+MobilePen: "108.4473347"
+NtlReplies: "0"
+PoliWeb: ""
+Pop_15_29: "28.3"
+Population: "3162083"
+Reso_Sponsor: "0"
+SN_Use: "5.5"
+SecureServers: "13.7"
+UNGGE: "0"
+USAID_NGO: "3.9"
+WCITVote: "0"
+WEF_Inno_Cap: "3"
+WEF_Tech_Readiness_Index: "3.75"
+WEF_Uni_Indus: "2.6"
+WGIPoliStab: "-0.16"
+WGIVoiceAccountability: "0.01" 
+-->
+
+</body>
+</html>
